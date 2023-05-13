@@ -87,3 +87,69 @@ function fn2(): never {
 
 // ================never================
 
+
+// ================object================
+
+// object表示一个js对象
+let obj: object
+obj = {}
+obj = function () {
+
+}
+
+// 使用{}来指定对象中可以包含的属性。语法：{ k1:v1, k2:v2 } 
+// 在属性后面加上?，表示属性为可选属性
+// [props: string]: any 表示key为string类型，value为any类型
+let person: { name: string, age?:number, [props: string]: any }
+person = { name: "张三" }
+person = { name: "李四", age: 18 }
+person = { name: "王五", age: 18, gender: 'M', username: "wangwu" }
+
+// lambda
+let func: (num1: number, num2: number) => string
+func = function (num1: number, num2: number) {
+    return (num1 + num2) + "5555";
+}
+let strResult = func(1, 2)
+console.log("strResult=", strResult)
+
+// 数组两种声明方式
+let arr1: string[]
+e = ['a', 'b', 'c']
+
+let arr2: Array<number>
+arr2 = [1, 2, 3]
+
+// 元组：固定长度的数组
+let tulpe: [string, number]
+tulpe = [ 'str', 1 ]
+
+// 枚举
+enum Gender {
+    Male = 0,
+    Female = 1
+}
+let student: { name: string, gender: Gender }
+student = {
+    name: 'jho',
+    gender: Gender.Male
+}
+
+console.log(student.gender === Gender.Male)
+
+// & 表示同时
+let animal: { name: string } & { age:  number }
+animal = { name: "狗子", age: 18 }
+console.log("animal=", animal)
+
+// 类型别名
+type myType = 1 | 2 | 3 | 4 | 5;
+let myObj1: myType
+let myObj2: myType
+let myObj3: myType
+
+
+// ================object================
+
+
+

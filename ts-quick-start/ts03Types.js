@@ -35,12 +35,69 @@ var f;
 f = 10;
 f = 'hello';
 f = false;
-// unknown是一个类型安全的any，不能像any一样赋值给任何类型的变量
+// unknown是一个类型安全的any，不能像any一样赋值给任何类型的变量，需要进行类型判断或者类型断言
 // c = f
 // 类型判断
 if (typeof f === "boolean") {
     c = f;
 }
-// 类型断言
+/*
+    类型断言语法一：变量 as 类型
+    类型断言语法二：<类型> 变量
+*/
+c = f;
 c = f;
 // ================unknown================
+// ================void================
+// void 用来表示空，以函数为例就表示没有返回值的函数
+function fn() {
+    console.log("Hello Void");
+}
+// ================void================
+// ================never================
+// never表示永远不会返回结果
+function fn2() {
+    throw new Error('Error1');
+}
+// ================never================
+// ================object================
+// object表示一个js对象
+var obj;
+obj = {};
+obj = function () {
+};
+// 使用{}来指定对象中可以包含的属性。语法：{ k1:v1, k2:v2 } 
+// 在属性后面加上?，表示属性为可选属性
+// [props: string]: any 表示key为string类型，value为any类型
+var person;
+person = { name: "张三" };
+person = { name: "李四", age: 18 };
+person = { name: "王五", age: 18, gender: 'M', username: "wangwu" };
+// lambda
+var func;
+func = function (num1, num2) {
+    return (num1 + num2) + "5555";
+};
+var strResult = func(1, 2);
+console.log("strResult=", strResult);
+// 数组两种声明方式
+var arr1;
+e = ['a', 'b', 'c'];
+var arr2;
+arr2 = [1, 2, 3];
+// 元组：固定长度的数组
+var tulpe;
+tulpe = ['str', 1];
+// 枚举
+var Gender;
+(function (Gender) {
+    Gender[Gender["Male"] = 0] = "Male";
+    Gender[Gender["Female"] = 1] = "Female";
+})(Gender || (Gender = {}));
+var student;
+student = {
+    name: 'jho',
+    gender: Gender.Male
+};
+console.log(student.gender === Gender.Male);
+// ================object================
