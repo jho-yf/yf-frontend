@@ -10,7 +10,7 @@
 tsc app.ts
 ```
 
-编译并监视某个文件
+编译并监视某个文件：当ts文件变化的时候，自动编译成js文件
 
 ```shell
 tsc app.ts -w
@@ -43,7 +43,8 @@ tsc -w
 ```json
 {
     "include": [
-        "./src/**/*"
+        "./src/**/*",
+        "./tests/**/*"
     ],
     "exclude": [
         "./src/exclude/**/*"
@@ -53,4 +54,5 @@ tsc -w
 
 `include`: 用来指定哪些ts文件需要被编译
 `exclude`: 排除不需要编译的ts文件
+
 - 默认值：`[ "node_modules", "bower_components", "jspm_packages" ]`

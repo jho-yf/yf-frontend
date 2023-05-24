@@ -5,11 +5,44 @@
             include: 指定哪些ts文件需要被编译
             exclude: 排除不需要编译的ts文件
                 默认值：[ "node_modules", "bower_components", "jspm_packages" ]
+            compilerOptions: 编译器选项
     */
     "include": [
         "./src/**/*"
     ],
     "exclude": [
         "./src/exclude/**/*"
-    ]
+    ],
+    "compilerOptions": {
+        // target 指定编译的es版本
+        "target": "ES2015",
+        // module 指定要使用的模块化的规范
+        "module": "ES2015",
+        // lib 指定项目中要使用的库
+        // "lib": [ "DOM" ]
+        // outDir 用于指定编译后文件所在的目录
+        "outDir": "./dist",
+        // outFile 将所有的全局作用域中的代码合并到同一个文件
+        // "outFile": "./dist/app.js"
+        // strict 所有严格检查的总开关
+        "strict": true,
+        // allowJs 是否对js文件进行编译，默认false
+        "allowJs": false,
+        // checkJs 是否检查js代码是否符合语法规范，默认false
+        "checkJs": false,
+        // removeComments 是否移除注释
+        "removeComments": true,
+        // noEmit 不生成编译后的文件
+        "noEmit": false,
+        // noEmitOnError 发生错误的时候不生成编译文件
+        "noEmitOnError": true,
+        // alwaysStrict 编译后的文件是否使用严格模式，默认false
+        "alwaysStrict": true,
+        // noImplicitAny 是否不允许隐式any
+        "noImplicitAny": true,
+        // noImplicitThis 是否不允许隐式this
+        "noImplicitThis": true,
+        // strictNullChecks 是否严格的检查null值
+        "strictNullChecks": true
+    }
 }

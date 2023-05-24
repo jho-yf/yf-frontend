@@ -143,11 +143,10 @@ animal = { name: "狗子", age: 18 }
 console.log("animal=", animal)
 
 // 类型别名
-type myType = 1 | 2 | 3 | 4 | 5;
+type myType = 1 | 2 | 3 | 4 | 5 | object | string | number;
 let myObj1: myType
 let myObj2: myType
 let myObj3: myType
-
 
 // ================object================
 
