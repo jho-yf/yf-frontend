@@ -9,3 +9,8 @@ function sum(num1: number, num2: number): number {
 console.log(sum(123, 456))
 
 console.log(hi)
+
+const num = 1
+console.log(num)
+
+console.log(Promise)

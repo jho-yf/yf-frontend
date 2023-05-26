@@ -14,7 +14,11 @@ module.exports = {
         // 指定打包文件所在目录
         path: path.resolve(__dirname, 'dist'),
         // 打包后文件的文件名
-        filename: "bundle.js"
+        filename: "bundle.js",
+        environment: {
+            // 打包不使用箭头函数
+            arrowFunction: false
+        }
     },
 
     // 指定webpack打包时要使用的模块
@@ -25,7 +29,35 @@ module.exports = {
                 // test 指的是规则生效的文件，支持正则表达式
                 test: /\.ts$/,
                 // 要使用的loader
-                use: 'ts-loader',
+                use: [
+                    {
+                        // 指定加载器
+                        loader: 'babel-loader',
+                        // 设置babel
+                        options: {
+                            // 设置预定义环境
+                            presets: [
+                                [
+                                    "@babel/preset-env",
+                                    // 配置信息
+                                    {
+                                        // 要兼容的目标浏览器
+                                        targets: {
+                                            "chrome": "88",
+                                            "ie": "11"
+                                        },
+
+                                        // 指定corejs版本
+                                        "corejs": "3",
+                                        // 使用corejs的方式：usage表示按需加载
+                                        "useBuiltIns": "usage"
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    'ts-loader'
+                ],
                 // 要排除的文件
                 exclude: /node-modules/
             }
