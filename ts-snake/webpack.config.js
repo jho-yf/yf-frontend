@@ -19,7 +19,9 @@ module.exports = {
         filename: "bundle.js",
         environment: {
             // 打包不使用箭头函数
-            arrowFunction: false
+            arrowFunction: false,
+            // 不适用const关键字
+            const: false
         }
     },
 
