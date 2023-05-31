@@ -1,8 +1,8 @@
 // 引入样式
 import './style/index.less'
-import Food from './modules/Food'
+import GameControl from './modules/GameControl'
 
-const food = new Food()
-food.changePosition()
+const gameControl = new GameControl()
+gameControl.start()
 
 
