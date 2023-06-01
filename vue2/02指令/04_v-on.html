@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 事件中直接写入js片段 -->
+        <button v-on:click="num++">点赞</button>
+        <!-- 事件指定一个回调函数，必须是Vue实例中定义的函数 -->
+        <button v-on:click="cancel">取消</button>
+        <!-- @click是v-on:click的简写 -->
+        <button @click="cancel">取消（简写）</button>
+        <span>有{{num}}个赞</span>
+
+         <!-- 事件修饰符 -->
+         <!-- v-on:click.once：只执行一次 -->
+         <div style="border: 1px solid red;padding: 20px;" v-on:click.once="hello">
+            大div
+            <!-- @click.stop：阻止事件冒泡到父元素 -->
+            <div style="border: 1px solid blue;padding: 20px;" @click.stop="hello">
+                小div <br />
+                <!-- @click.prevent.stop：阻止默认事件发生，并且阻止事件冒泡到父元素 -->
+                <a href="https://jho-yf.github.io/#/fore-end/basic?id=vue" @click.prevent.stop="hello">乙方小弟的笔记</a>
+            </div>
+        </div>
+
+        <!-- 按键修饰符 -->
+        <input type="text" v-model="num" v-on:keyup.up="num+=1" @keyup.down="num-=1" @click.ctrl="num=0"><br>
+
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 0,
+            },
+            methods: {
+                cancel() {
+                    if (this.num > 0) {
+                        this.num--;
+                    }
+                }, 
+                hello() {
+                    alert("点击了");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

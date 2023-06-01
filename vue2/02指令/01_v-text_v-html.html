@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_v-text_v-html</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}} {{1+1}} {{myMethod()}}
+        <br/>
+        <span v-html="msg"></span>
+        <br/>
+        <span v-text="msg"></span>
+    </br>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data: {
+                msg: "<h1>Hello</h1>"
+            },
+            methods: {
+                myMethod() {
+                    return "myMethod...return"
+                }
+            }
+        })
+    </script>
+</body>

@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+</head>
+<body>
+    <div id="app">
+        
+        <!-- v-for="item in items" -->
+        <h1>v-for="item in items"</h1>
+        <ul>
+            <li v-for="user in users">
+                {{user.name}} ==> {{user.gender}} ==> {{user.age}}
+            </li>
+        </ul>
+
+        <h1>获取数组下标 v-for="(item, index) in items"</h1>
+        <!-- 获取数组下标 v-for="(item, index) in items" -->
+        <ul>
+            <li v-for="(user, index) in users">
+                {{index}} ==> {{user.name}} ==> {{user.gender}} ==> {{user.age}}<br>
+                对象信息：
+                <span v-for="(v,k,i) in user">{{k}}={{v}}={{i}};&nbsp;</span>
+            </li>
+        </ul>
+
+        <h1>遍历的时候都加上:key来区分不同数据，提高vue渲染效率</h1>
+        <!-- 遍历的时候都加上:key来区分不同数据，提高vue渲染效率 -->
+        <ul>
+            <li v-for="user in users" :key="user.name">
+                {{user.name}} ==> {{user.gender}} ==> {{user.age}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(num, index) in nums" :key="index">{{num}}</li>
+        </ul>
+
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                users: [
+                    { name: '张三', gender: '女', age: 21 },
+                    { name: '李四', gender: '男', age: 22 },
+                    { name: '王五', gender: '男', age: 18 },
+                    { name: '赵六', gender: '女', age: 30 }
+                ],
+                nums: [1, 2, 2, 3, 4, 5]
+            }
+        })
+    </script>
+</body>
+</html>

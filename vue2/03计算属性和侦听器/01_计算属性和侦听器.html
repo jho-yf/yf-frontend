@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性和侦听器</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 某些结果是基于数据实时计算出来的，可以利用计算属性来完成 -->
+        <ul>
+            <li>《西游记》 单价：{{xyjPrice}} 数量：<input type="number" v-model="xyjNum"></li>
+            <li>《水浒传》 单价：{{shzPrice}} 数量：<input type="number" v-model="shzNum"></li>
+            <li>总价：{{totalPrice}}</li>
+        </ul>
+        {{msg}}
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                xyjPrice: 99.98,
+                shzPrice: 88.88,
+                xyjNum: 0,
+                shzNum: 0,
+                msg: ""
+            }, 
+            computed: {
+                // 依赖的值只要发生变化都会触发此函数
+                totalPrice() {
+                    return this.xyjPrice * this.xyjNum + this.shzPrice * this.shzNum
+                }
+            },
+            watch: {
+                // watch可以让我们监控一个值的变化，从而做出相应的反应
+                xyjNum: function(newVal, oldVal) {
+                    console.log("newVal=" + newVal);
+                    console.log("oldVal=" + oldVal);
+                    if (newVal >= 3) {
+                        this.msg = "库存超出限制了！";
+                        this.xyjNum = 3;
+                    } else {
+                        this.msg = "";
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
