@@ -8,6 +8,7 @@ class Snake {
     private _direction: string = 'ArrowRight'
     private _isAlive: boolean = true
     private _speed: number = 300
+    private static readonly _directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
 
     constructor() {
         this._element = document.getElementById("snake")!
@@ -28,6 +29,7 @@ class Snake {
             throw new Error('GAME OVER!')
         }
 
+        this.moveBody()
         this._head.style.left = value + 'px'
     }
     
@@ -44,10 +46,14 @@ class Snake {
             throw new Error('GAME OVER!')
         }
 
+        this.moveBody()
         this._head.style.top = value + 'px'
     }
 
     set direction(direction: string) {
+        if (Snake._directions.indexOf(direction) == -1) {
+            return
+        }
         this._direction = direction
     }
 
@@ -60,25 +66,53 @@ class Snake {
     }
 
     addBody(): void {
-        let div = document.createElement("div")
-        this._element.insertAdjacentElement("beforebegin", div)
+        this.moveBody()
+        this._element.insertAdjacentHTML("beforeend", `<div></div>`)
+        this.moveBody()
     }
 
-    move() {
-        switch (this._direction) {
-            case "ArrowUp":
-                this.Y -= 10
-                break
-            case "ArrowDown":
-                this.Y += 10
-                break
-            case "ArrowLeft":
-                this.X -= 10
-                break
-            case "ArrowRight":
-                this.X += 10
+    moveBody(): void {
+        for (let i = this._body.length - 1; i > 0; i--) {
+            let pre = this._body[i - 1] as HTMLElement
+            let preX = pre.offsetLeft;
+            let preY = pre.offsetTop;
+
+            (this._body[i] as HTMLElement).style.left = preX + 'px';
+            (this._body[i] as HTMLElement).style.top = preY + 'px'
         }
-        this._isAlive && setTimeout(this.move.bind(this), this._speed)
+    }
+
+    move(checkEat: (snakeHeadX:number, snakeHeadY:number) => void): void {
+        const promise = new Promise((res, rej) => {
+            try {
+                switch (this._direction) {
+                    case "ArrowUp":
+                        this.Y -= 10
+                        break
+                    case "ArrowDown":
+                        this.Y += 10
+                        break
+                    case "ArrowLeft":
+                        this.X -= 10
+                        break
+                    case "ArrowRight":
+                        this.X += 10
+                }
+
+                checkEat(this.X, this.Y)
+
+                this._isAlive && setTimeout(() => {
+                    this.move(checkEat)
+                }, this._speed)
+                res
+            } catch(err) {
+                rej(err)
+            }
+        })
+        promise.then(() => {}, (err) => {
+            alert(err.message)
+            this.isAlive = false
+        })
     }
 
 }

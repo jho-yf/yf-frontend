@@ -20,25 +20,33 @@ class GameControl {
     init() {
         document.addEventListener('keydown', this.onKeydown.bind(this))
         this._snake.isAlive = true
-        this._snake.speed = 300 - (this._scorePanel.level - 1) * 30
+        this._snake.speed = this.countSpeed()
     }
 
     start() {
-        // 初始化游戏
+        // 初始化
         this.init()
 
-        // 蛇移动
-        try {
-            this._snake.move()
-        } catch(e) {
-            alert(e)
-            this._snake.isAlive = false
-        }
+        // 移动
+        this._snake.move(this.checkEat.bind(this))
     }
 
     // 按键监听
     onKeydown(event: KeyboardEvent) {
         this._snake.direction = event.key
+    }
+
+    checkEat(snakeHeadX: number, snakeHeadY: number): void {
+        if (snakeHeadX === this._food.X && snakeHeadY === this._food.Y) {
+            this._food.changePosition()
+            this._scorePanel.addScore()
+            this._snake.addBody()
+            this._snake.speed = this.countSpeed()
+        }
+    }
+
+    countSpeed(): number {
+        return 300 - (this._scorePanel.level - 1) * 30
     }
 
 }
