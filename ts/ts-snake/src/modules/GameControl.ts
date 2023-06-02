@@ -14,7 +14,7 @@ class GameControl {
     constructor() {
         this._snake = new Snake()
         this._food = new Food()
-        this._scorePanel = new ScorePanel()
+        this._scorePanel = new ScorePanel(10, 2)
     }
 
     init() {
@@ -40,8 +40,8 @@ class GameControl {
         if (snakeHeadX === this._food.X && snakeHeadY === this._food.Y) {
             this._food.changePosition()
             this._scorePanel.addScore()
-            this._snake.addBody()
             this._snake.speed = this.countSpeed()
+            this._snake.addBody()
         }
     }
 

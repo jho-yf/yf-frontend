@@ -29,8 +29,18 @@ class Snake {
             throw new Error('GAME OVER!')
         }
 
+        // 防止掉头
+        if (this._body[1] && (this._body[1] as HTMLElement).offsetLeft === value) {
+            if (value > this.X) {
+                value = this.X - 10
+            } else {
+                value = this.X + 10
+            }
+        }
+
         this.moveBody()
         this._head.style.left = value + 'px'
+        this.checkHeadHitBody()
     }
     
     get Y() {
@@ -46,8 +56,18 @@ class Snake {
             throw new Error('GAME OVER!')
         }
 
+        // 防止掉头
+        if (this._body[1] && (this._body[1] as HTMLElement).offsetTop === value) {
+            if (value > this.Y) {
+                value = this.Y - 10
+            } else {
+                value = this.Y + 10
+            }
+        }
+
         this.moveBody()
         this._head.style.top = value + 'px'
+        this.checkHeadHitBody()
     }
 
     set direction(direction: string) {
@@ -66,9 +86,7 @@ class Snake {
     }
 
     addBody(): void {
-        this.moveBody()
         this._element.insertAdjacentHTML("beforeend", `<div></div>`)
-        this.moveBody()
     }
 
     moveBody(): void {
@@ -97,11 +115,11 @@ class Snake {
                         break
                     case "ArrowRight":
                         this.X += 10
+                        break
                 }
 
-                checkEat(this.X, this.Y)
-
                 this._isAlive && setTimeout(() => {
+                    checkEat(this.X, this.Y)
                     this.move(checkEat)
                 }, this._speed)
                 res
@@ -113,6 +131,18 @@ class Snake {
             alert(err.message)
             this.isAlive = false
         })
+    }
+
+    /**
+     * 检查蛇头是否撞到自己
+     */
+    checkHeadHitBody(): void {
+        for (let i = 1; i < this._body.length; i++) {
+            let ele = this._body[i] as HTMLElement
+            if (this.X === ele.offsetLeft && this.Y === ele.offsetTop) {
+                throw new Error('GAME OVER!')
+            }
+        }
     }
 
 }
