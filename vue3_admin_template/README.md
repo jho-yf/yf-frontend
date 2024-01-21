@@ -191,7 +191,6 @@ node_modules
 ```
 
 
-
 # prettier配置
 
 prettier：代码格式化美观
@@ -895,4 +894,18 @@ div {
 ```
 
 
+
+# mock数据
+
+https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md
+
+安装依赖
+
+```shell
+pnpm install -D vite-plugin-mock mockjs
+```
+
+
+
+# axios二次封装
 
