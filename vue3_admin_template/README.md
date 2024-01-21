@@ -907,5 +907,3 @@ pnpm install -D vite-plugin-mock mockjs
 
 
 
-# axios二次封装
-
