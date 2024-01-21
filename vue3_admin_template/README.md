@@ -533,7 +533,7 @@ import 'virtual:svg-icons-register'
 
 将svg文件放在文件夹中`src/assets/icons/phone.svg`
 
-使用
+使用svg
 
 ```vue
 <svg style="width:30px; height:30px">
@@ -541,7 +541,7 @@ import 'virtual:svg-icons-register'
 </svg>
 ```
 
-封装全局组件，新建文件`components/SvgIcon/index.vue`
+封装组件，新建文件`components/SvgIcon/index.vue`
 
 ```vue
 <template>
@@ -579,7 +579,7 @@ defineProps({
 <style scoped></style>
 ```
 
-使用全局组件
+使用组件
 
 ```vue
 <template>
@@ -593,8 +593,43 @@ import SvgIcon from '@/components/SvgIcon/index.vue'
 </script>
 
 <style scoped></style>
-
 ```
 
+封装注册为全局组件
 
+`src/main.ts`
+
+```tsx
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// 引入自定义插件对象：注册整个项目全局组件
+import globalComponent from '@/components'
+
+// 创建应用实例对象
+const app = createApp(App)
+
+// 安装自定义插件
+app.use(globalComponent)
+// 将应用挂载到挂载点
+app.mount('#app')
+```
+
+`src/components/index.ts`
+
+```tsx
+// 引入自定义组件
+import SvgIcon from './SvgIcon/index.vue'
+
+const globalComponents = { SvgIcon }
+
+// 对外暴漏插件对象
+export default {
+  install(app) {
+    Object.keys(globalComponents).forEach((key) => {
+      app.component(key, globalComponents[key])
+    })
+  },
+}
+```
 
