@@ -9,5 +9,9 @@ const app = createApp(App)
 
 // 安装自定义插件
 app.use(globalComponent)
+
+// 引入模板的全局样式
+import '@/styles/index.scss'
+
 // 将应用挂载到挂载点
 app.mount('#app')
