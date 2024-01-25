@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据代理</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        数据代理：通过一个对象代理对另一个对象中属性的读/写操作
+     -->
+    <script type="text/javascript">
+        let obj = {
+            x: 100
+        }
+
+        let proxy = {
+        }
+
+        Object.defineProperty(proxy, 'x', {
+            get() {
+                return obj.x
+            },
+            set(value) {
+                obj.x = value
+            }
+        })
+
+        console.log(proxy.x == 100);
+        
+        proxy.x = 300;
+        console.log(obj.x == 300);
+
+    </script>
+</body>
+</html>

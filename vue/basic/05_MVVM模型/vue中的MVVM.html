@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>理解MVVM</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        MVVM模型
+            1. M: 模型(Model): data中的数据
+            2. V：视图(View): 模板代码
+            3. VM：视图模型(ViewModel): Vue实例
+
+        注：
+            1. data中所有属性，最后都出现在vm中
+            2. vm所有属性以及Vue原型上所有属性，在Vue模板中都可以直接使用
+
+     -->
+
+    <!-- View -->
+    <div id="root">
+        <h1>学校名称: {{name}}</h1>
+        <h1>学校地址: {{address}}</h1>
+        <h1>vm属性 $options: {{$options}}</h1>
+        <h1>vm属性 $emit: {{$emit}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        // VM: view model
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    name: 'GPNU',
+                    address: '广州市'
+                };
+            },
+        })
+        console.log('vm', vm);
+    </script>
+</body>
+</html>

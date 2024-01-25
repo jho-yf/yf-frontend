@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的数据代理</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        
+     -->
+
+    <!-- View -->
+    <div id="root">
+        <h1>学校名称: {{name}}</h1>
+        <h1>学校地址: {{address}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        let data = {
+            name: 'GPNU',
+            address: '中山大道西'
+        }
+
+        const vm = new Vue({
+            el: '#root',
+            data
+        })
+        console.log(vm)
+        console.log(vm.name)
+        vm.address = '中山大道西7号'
+
+        console.log(vm._data.name)
+        console.log(vm._data.address)
+        console.log(vm._data == data)
+
+        console.log(data.address == '中山大道西7号');
+    </script>
+</body>
+</html>
