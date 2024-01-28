@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+
+        .demo1 {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        .parent {
+            background-color: blueviolet;
+            padding: 5px;
+        }
+
+        .child {
+            background-color: cadetblue;
+            padding: 5px;
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: burlywood;
+            overflow: auto;
+        }
+
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Vue中的事件修饰符
+            prevent     阻止默认事件（常用）
+            stop        阻止事件冒泡（常用）
+            once        事件只触发一次（常用）
+            capture     使用事件的捕获模式
+            self        只有event.target是当前操作的元素才触发事件
+            passive     事件默认行为立即执行，无需等待事件回调执行完毕
+     -->
+    <div id="root">
+        <!-- 阻止默认事件 -->
+        <a href="https://www.baidu.com" @click.prevent="showInfo">点我</a>
+        
+        <!-- 阻止事件冒泡 -->
+        <div class="demo1" @click="showInfo">
+            <button @click="showInfo">点我冒泡</button>
+            <button @click.stop="showInfo">点我不冒泡</button>
+        </div>
+
+        <!-- 事件只触发一次 -->
+        <div>
+            <button @click="showInfo">点我可以触发多次事件</button>
+            <button @click.once="showInfo">点我只触发一次事件</button>
+        </div>
+
+        <!-- 使用事件的捕获模式 -->
+        <div class="parent" @click.capture="showMsg(1)">
+            div1
+            <div class="child" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <!-- 只有event.target是当前操作的元素才触发事件 -->
+        <div class="demo1" @click.self="showInfo">
+            <button @click="showInfo">点我</button>
+        </div>
+
+        <!-- 事件默认行为立即执行，无需等待事件回调执行完毕 -->
+        <!-- 
+            @scroll     设置滚动条滚动回调
+            @wheel      设置鼠标滚轮滚动回调
+         -->
+        <ul @scroll.passive="onScroll" @wheel.passive="onWheel" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            methods: {
+                showInfo(e) {
+                    alert('Hello')
+                },
+                showMsg(num) {
+                    console.log('num = ' + num);
+                },
+                onScroll() {
+                    for (let i = 0; i < 100000; i++) {
+                        console.log('onScroll')
+                    }
+                },
+                onWheel() {
+                    for (let i = 0; i < 100000; i++) {
+                        console.log('onWheel')
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>
