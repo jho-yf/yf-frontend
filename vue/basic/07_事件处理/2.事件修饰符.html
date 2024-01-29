@@ -54,6 +54,8 @@
         <div class="demo1" @click="showInfo">
             <button @click="showInfo">点我冒泡</button>
             <button @click.stop="showInfo">点我不冒泡</button>
+            <a href="https://www.baidu.com" @click.stop.prevent="showInfo">点我先停止冒泡再阻止默认行为</a>
+            <a href="https://www.baidu.com" @click.prevent.stop="showInfo">点我先阻止默认行为再停止冒泡</a>
         </div>
 
         <!-- 事件只触发一次 -->
