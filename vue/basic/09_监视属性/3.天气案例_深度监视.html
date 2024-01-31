@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气案例 - 深度监视</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        深度监视：
+            1. Vue中的watch默认不监测对象内部的改变（一层）
+            2. 配置deep:true可以开启对对象内部值改变的监测
+    -->
+
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="change">切换天气</button>
+        <hr>
+        <h3>a的值是:{{numbers.a}}</h3>
+        <button @click="numbers.a++">点我a+1</button>
+        <h3>b的值是:{{numbers.b}}</h3>
+        <button @click="numbers.b++">点我b+1</button>
+        <br>
+        <br>
+        <button @click="numbers = {a:66,b:88}">点我修改numbers</button>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    isHot: true,
+                    numbers: {
+                        a: 1,
+                        b: 2
+                    }
+                }
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            methods: {
+                change() {
+                    this.isHot = !this.isHot
+                }
+            },
+            watch: {
+                'numbers.a': {
+                    handler(newVal, oldVal) {
+                        console.log('numbers.a changed.', newVal, oldVal);
+                    }
+                },
+                numbers: {
+                    deep: true,
+                    handler(newVal, oldVal) {
+                        console.log('numbers changed.', newVal, oldVal);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
