@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本列表</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人员列表</h2>
+        <ul>
+            <li v-for="item in persons" :key="item.id">
+                {{item.name}}-{{item.age}}
+            </li>
+        </ul>
+
+        <!-- 遍历数组 -->
+        <h2>人员列表</h2>
+        <ul>
+            <li v-for="(item, index) in persons" :key="item.id">
+                {{index}}-{{item}}
+            </li>
+        </ul>
+
+        <!-- 遍历对象 -->
+        <h2>汽车信息</h2>
+        <ul>
+            <li v-for="(v, k) in car">
+                {{k}}: {{v}}
+            </li>
+        </ul>
+
+        <!-- 遍历字符串 -->
+        <h2>字符串遍历</h2>
+        <ul>
+            <li v-for="(char, index) in str">
+                {{index}} - {{char}}
+            </li>
+        </ul>
+
+        <!-- 遍历指定次数 -->
+        <h2>遍历指定次数</h2>
+        <ul>
+            <li v-for="(val, index) in 10">
+                {{index}} - {{val}}
+            </li>
+        </ul>
+
+
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    persons: [
+                        {id:'001', name:'zhangsan', age: 18},
+                        {id:'002', name:'lisi', age: 19},
+                        {id:'003', name:'wangwu', age: 20}  
+                    ],
+                    car: {
+                        name: '奥迪A16',
+                        price: '8w',
+                        color: '黑色'
+                    },
+                    str: 'hello vue'
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>

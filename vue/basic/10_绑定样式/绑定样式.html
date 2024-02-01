@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式</title>
+    <style>
+        .basic {
+           width: 150px;
+           height: 100px;
+           border: 2px solid black;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        .blue {
+            background-color: blue;
+        }
+
+        .style1 {
+           border: 20px solid black;
+        }
+        .style2 {
+            border-radius: 20px;
+        }
+        .style3 {
+            background-color: chocolate;
+        }
+    </style>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 绑定class样式：字符串写法，适用于：样式类名不确定，需要动态指定 -->
+        <div class="basic" :class="color" @click="changeColor"></div>
+        <br>
+        <!-- 绑定class样式：数组写法，适用于：样式和样式个数不确定 -->
+        <div class="basic" :class="classArr" @click="addStyle"></div>
+        <br>
+        <!-- 绑定class样式：对象写法，适用于：样式和样式个数都确定，但需要动态决定用不用 -->
+        <div class="basic" :class="classObj" @click="changeStyle"></div>
+        <br>
+        <!-- 绑定style样式：对象写法 -->
+        <div class="basic" :style="styleObj" @click="largeFontSize">VUE</div>
+        <br>
+        <!-- 绑定style样式：数组写法 -->
+        <div class="basic" :style="styleArr">VUE</div>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    color: '',
+                    classArr: [],
+                    classObj: {
+                        style1: false,
+                        style2: false,
+                        style3: false
+                    },
+                    size: 10,
+                    styleArr: [
+                        {
+                            fontSize: '40px'
+                        },
+                        {
+                            color: 'blue'
+                        },
+                        {
+                            backgroundColor: 'red'
+                        }
+                    ]
+                }
+            },
+            computed: {
+                styleObj() {
+                    return {
+                        fontSize: this.size + 'px'
+                    }
+                }
+            },
+            methods: {
+                changeColor() {
+                    const arr = ['red', 'green', 'blue']
+                    const index = Math.floor(Math.random() * 3)
+                    this.color = arr[index]
+                },
+                addStyle() {
+                    this.classArr = ['style1', 'style2', 'style3']
+                },
+                changeStyle() {
+                    this.classObj.style1 = !this.classObj.style1
+                    this.classObj.style2 = !this.classObj.style2
+                    this.classObj.style3 = !this.classObj.style3
+                },
+                largeFontSize() {
+                    this.size++
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        条件渲染：
+            1. v-if
+                写法：
+                    a. v-if="表达式"
+                    b. v-else-if="表达式"
+                    c. v-else
+                适用于：切换频率较低的场景
+                特点：不展示的DOM元素直接被移除
+                注意：v-if可以和v-else-if v-else一起使用，但要是结构不能被打断
+            
+            2. v-show
+                写法：v-show="表达式"
+                适用于：切换频率较高的场景
+                特点：不展示的DOM元素未被移除，仅仅使用样式隐藏
+
+            3. 备注：使用v-if时，元素可能无法获取到，而使用v-show一定可以获取到
+     -->
+    <div id="root">
+        <!-- 使用v-show做条件渲染 -->
+        <h2 v-show="isShow">VUE</h2>
+        <h2 v-show="1 === 1">1 === 1</h2>
+
+        <!-- 使用v-if做条件渲染 -->
+        <h2 v-if="true">v-if="true"</h2>
+
+        <button @click="num++">点我num++</button>
+        <h2 v-show="num === 1">Angular</h2>
+        <h2 v-show="num === 2">React</h2>
+        <h2 v-show="num === 3">VUE</h2>
+
+        <div v-if="num === 1">Angular</div>
+        <div v-else-if="num === 2">React</div>
+        <div v-else-if="num === 3">VUE</div>
+        <div v-else>无</div>
+
+        <template v-if="true">
+            <h2>template</h2>
+        </template>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    isShow: true,
+                    num: 0
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>
