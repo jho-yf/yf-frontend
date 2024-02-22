@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表更新的问题</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        let data = {
+            name: "jho",
+            age: 18
+        }
+
+        const obs = new Observer(data)
+
+        let vm = {}
+        vm._data = obs
+
+        function Observer(data) {
+            Object.keys(data).forEach((key) => {
+                Object.defineProperty(this, key, {
+                    get() {
+                        console.log(`${key} getter called`)
+                        return data[key]
+                    },
+                    set(val) {
+                        console.log(`${key} setter called`)
+                        data[key] = val
+                    }
+                })
+            })
+        }
+
+        vm._data.name = '6666'
+        console.log(vm._data.name)
+    </script>
+</body>
+</html>

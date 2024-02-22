@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表排序</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入姓名" v-model="keyword">
+        <button @click="sortType = 2">年龄升序</button>
+        <button @click="sortType = 1">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <li v-for="item in filteredPersons" :key="item.id">
+                {{item.name}}-{{item.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    keyword: '',
+                    sortType: 0,    // 0：原顺序 1：降序 2：升序
+                    persons: [
+                        {id:'001', name:'zhangsan', age: 18},
+                        {id:'002', name:'lisi', age: 19},
+                        {id:'003', name:'wangwu', age: 22},
+                        {id:'004', name:'zhaoliu', age: 20}
+                    ]
+                }
+            },
+            computed: {
+                filteredPersons() {
+                    const arr = this.persons.filter((p) => {
+                        return p.name.indexOf(this.keyword) !== -1;
+                    })
+
+                    switch (this.sortType) {
+                        case 0:
+                            return arr
+                        case 1:
+                            return arr.sort((a, b) => {
+                                return b.age - a.age
+                            })
+                        case 2:
+                            return arr.sort((a, b) => {
+                                return a.age - b.age
+                            })
+                    }
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>

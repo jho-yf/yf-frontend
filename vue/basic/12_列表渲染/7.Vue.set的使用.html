@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set的使用</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    student: {
+                        name: 'zhangsan',
+                        age: 18,
+                        hobbies: ['吃饭', '睡觉', '打豆豆']
+                    }
+                        
+                }
+            },
+            methods: {
+                
+            }
+        })
+        Vue.set(vm._data.student, 'sex', '男')
+        console.log(vm.student.sex)
+
+        Vue.set(vm.student, 'height', 175)
+        console.log(vm.student.height)
+
+        Vue.set(vm.student.hobbies, '0', '吃饭hhhh')
+        console.log(vm.student.hobbies)
+
+        console.log(vm._data.student === vm.student)
+    </script>
+</body>
+</html>
