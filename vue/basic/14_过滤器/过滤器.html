@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/dayjs.min.js"></script>
+</head>
+<body>
+    <!-- 
+     -->
+    <div id="root">
+        <h2>显示格式化后的时间</h2>
+        <h3>计算属性实现: {{ fmtTime }}</h3>
+        <h3>method实现: {{ fmtTime }}</h3>
+        <h3>过滤器实现1: {{ time | timeFormatter }}</h3>
+        <h3>过滤器实现2: {{ time | timeFormatter('YYYY-MM-DD HH:mm:ss') | mySlice }}</h3>
+    </div>
+
+    <script type="text/javascript">
+
+        // 全局过滤器
+        Vue.filter('mySlice', function(value) {
+            return value.slice(0, 4)
+        })
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    time: 1709042514798
+                }
+            },
+            methods: {
+                getFmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            computed: {
+                fmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 局部过滤器
+            filters: {
+               timeFormatter(value, formatPattern) {
+                   return dayjs(value).format(formatPattern)
+               }
+            }
+        })
+    </script>
+</body>
+</html>

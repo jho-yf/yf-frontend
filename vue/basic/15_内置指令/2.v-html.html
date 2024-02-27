@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-html指令</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-html:
+            1. 作用：向其所在的节点中渲染html内容
+            2. 与插值语法的区别：
+                a. v-html会替换掉节点中的内容，{{xxx}}则不会
+                b. v-html会将html内容中的标签渲染出来，而插值语法不会
+            3. 注意：v-html有安全问题
+                a. 在网站上动态渲染任意HTML非常危险，会导致XSS攻击
+                b. 一定要在可信的内容上使用v-html,不要交给用户控制
+     -->
+    <div id="root">
+        <div v-html="str"></div>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    str: "<h1>hello world</h1>"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
