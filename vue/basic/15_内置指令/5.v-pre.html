@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-pre指令</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-pre:
+            1. 跳过其所在节点的编译过程
+            2. 可以利用它跳过，没有使用指令语法、没有使用插值语法的节点，提高编译速度
+     -->
+    <div id="root">
+        <h2 v-pre>VUE</h2>
+        <h2 v-once v-pre>初始化值：{{num}}</h2>
+        <h2 v-pre>当前值：{{num}}</h2>
+        <button @click="num++" v-pre>点我+1</button>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    num: 1
+                }
+            }
+        })
+    </script>
+</body>
+</html>

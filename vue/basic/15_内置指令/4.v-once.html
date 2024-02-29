@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-once指令</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-once: 只渲染一次，之后的更新不会触发渲染
+     -->
+    <div id="root">
+        <h2 v-once>初始化值：{{num}}</h2>
+        <h2>当前值：{{num}}</h2>
+        <button @click="num++">点我+1</button>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    num: 1
+                }
+            }
+        })
+    </script>
+</body>
+</html>

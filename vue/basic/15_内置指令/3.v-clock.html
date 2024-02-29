@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-clock指令</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+    <style>
+        [v-clock] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        v-clock:
+            1. 本质是一个特殊的属性，Vue实例创建完毕并接管容器后，会删掉`v-clock`属性
+            2. 使用css配合`v-clock`可以解决网速慢时出现{{xxxx}}的问题
+     -->
+    <div id="root">
+        <h2 v-clock>{{name}}</h2>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(() => {
+            new Vue({
+                el: '#root',
+                data() {
+                    return {
+                        name: "VUE"
+                    }
+                }
+            })
+        }, 5000)
+    </script>
+</body>
+</html>
