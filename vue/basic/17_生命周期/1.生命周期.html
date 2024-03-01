@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        生命周期：钩子函数
+            1. `beforeCreate`：Vue实例创建前调用，生命周期、事件初始化，但数据代理还未开始
+            2. `created`：Vue实例创建后调用，数据监测，数据代理初始化
+            3. `beforeMount`：模板解析前调用
+            4. `mounted`：模板解析后调用
+            5. `beforeUpdate`：模板更新前调用
+            6. `updated`：模板更新后调用
+     -->
+    <div id="root">
+        <h1 :style="{opacity}">{{title}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    title: "VUE",
+                    opacity: 1
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate invoked.')
+                console.log('this:', this)
+                debugger
+            },
+            created() {
+                console.log('created invoked.')
+                console.log('this:', this)
+                debugger
+            },
+            beforeMount() {
+                console.log('beforeMount invoked.')
+                console.log('this:', this)
+                debugger
+            },
+            // Vue完成模板的解析并把初始化的真实DOM插入页面后，会调用`mounted`钩子函数
+            mounted() {
+                console.log('mounted invoked.')
+                console.log('this:', this)
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) {
+                        this.opacity = 1
+                    }
+                }, 10)
+            },
+        })
+    </script>
+</body>
+</html>
