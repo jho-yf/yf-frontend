@@ -29,3 +29,25 @@
 > 使用`vue inspect > default.vue.config.js`可以查看vue脚手架默认配置
 > 使用`vue.config.js`可以对脚手架进行个性化配置，详情见：[https://cli.vuejs.org/config/](https://cli.vuejs.org/config/)
 
+## ref属性
+1. 被用于给元素或子组件注册引用信息(id的替代者)
+2. 应用在html标签上时候，获取的是真实的DOM信息。应用在组件上时候，获取的是组件实例`VueComponent`
+3. 使用方式
+
+```vue
+<h1 ref="myRef">Hello</h1>
+<MyComponent ref="myComponentRef" />
+
+<script>
+    export default {
+        ...
+        methods: {
+            showDOM() {
+                console.log(this.$refs)
+                console.log(this.$refs.myRef)
+                console.log(this.$refs.myComponentRef)
+            }
+        }
+    };
+</script>
+```
