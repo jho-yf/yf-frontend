@@ -16,7 +16,7 @@
     |-- README.md               // 项目说明
     |-- vue.config.js           // vue-cli配置文件
     |-- .gitignore              // git忽略文件
-        
+
 ## 不同版本vue
 
 - vue.js与vue.runtime.xxx.js区别:
@@ -51,3 +51,47 @@
     };
 </script>
 ```
+
+## props属性
+
+让组件可以接收来自父组件的数据，props属性是父组件向子组件传递数据的唯一方法。
+
+1. 传递数据
+
+```vue
+<Demo name="xxx" />
+```
+
+2. 接收数据
+
+```vue
+<script>
+    // 方式一
+    export default {
+        props: ['name']
+    }
+
+    // 方式二
+    export default {
+        props: {
+            name: String
+        }
+    }
+
+    // 方式三
+    export default {
+        props: {
+            name: {
+                type: String,
+                required: false,
+                default: 'xxx'
+            }
+        }
+    }
+</script>
+```
+
+注意：
+    1. props是只读的，Vue底层会监测对props的修改，如果修改了，Vue会抛出警告。
+    2. 若业务需求需要修改，则建议将props数据赋值到data中，然后再去修改data中的数据。
+
