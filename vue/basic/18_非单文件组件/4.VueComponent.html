@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueComponent</title>
+
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        关于VueComponent
+            1. 组件本质是一个名为VueComponent的构造函数，是由Vue.extend()创建的
+            2. 当通过html标签引入组件（如：<school></school>）的时候，Vue会自动构造VueComponent对象
+                即：new VueComponent(options)
+            3. 每次调用Vue.extend()返回的都是一个全新的VueComponent对象
+            4. this指向
+                a. 组件配置中，data函数、methods函数、watch函数、computed函数的this均是VueComponent实例对象
+                b. new Vue(options)配置中， data函数、methods函数、watch函数、computed函数的this均是Vue实例对象
+            5. VueComponent的实例对象简称`vc`，Vue的实例对象简称`vm`
+
+        内置关系：
+            1. VueComponent.prototype.__proto__ === Vue.prototype
+            2. 组件实例对象vc可以访问到Vue原型上的属性、方法
+    
+     -->
+    <div id="root">
+        <school></school>
+        <hello></hello>
+    </div>
+
+    <script type="text/javascript">
+        // 创建school组件
+        const school = Vue.extend({
+            template: `
+                <div>
+                    <h2>学校名称：{{name}}</h2>
+                    <h2>学校地址：{{address}}</h2>
+                </div>
+            `,
+            data() {
+                return {
+                    name: '北京工业大学',
+                    address: '北京'
+                }
+            }
+        })
+
+        const hello = Vue.extend({
+            template: `
+                <h2>Hello VUE</h2>
+            `,
+            data() {
+                return {
+                }
+            }
+        })
+
+        console.log('school:', school)
+        console.log('hello:', hello)
+        console.log(school === hello)
+
+        // 局部注册组件
+        new Vue({
+            el: '#root',
+            components: {
+                school, hello
+            }
+        })
+
+        // VueComponent.prototype.__proto__ === Vue.prototype
+        console.log(hello.prototype.__proto__ === Vue.prototype)
+    </script>
+</body>
+</html>

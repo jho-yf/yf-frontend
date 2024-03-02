@@ -8,16 +8,28 @@
 </head>
 <body>
     <!-- 
-        生命周期：钩子函数
-            1. `beforeCreate`：Vue实例创建前调用，生命周期、事件初始化，但数据代理还未开始
-            2. `created`：Vue实例创建后调用，数据监测，数据代理初始化
-            3. `beforeMount`：模板解析前调用
-            4. `mounted`：模板解析后调用
-            5. `beforeUpdate`：模板更新前调用
-            6. `updated`：模板更新后调用
+        生命周期（钩子函数）
+            将要创建：调用beforeCreate函数
+            创建完毕：调用created函数
+            将要挂载：调用beforeMount函数
+            挂载完毕：调用mounted函数
+            将要更新：调用beforeUpdate函数
+            更新完毕：调用updated函数
+            将要销毁：调用beforeDestroy函数
+            销毁完毕：调用destroyed函数
+
+        常用的生命周期钩子：
+            mounted：发送ajax请求、启动定时器、绑定自定义事件、订阅消息等初始化操作
+            beforeDestroy：取消定时器、解绑自定义事件、取消订阅消息等销毁操作
+
+        关于销毁Vue实例：
+            1. 销毁后，借助Vue开发者工具看不到任何消息
+            2. 销毁后，自定义事件会失效，但原生DOM事件依然有效
+            3. 一般不会在beforeDestroy操作数据，因为即便操作数据，也不会触发更新流程
      -->
     <div id="root">
         <h1 :style="{opacity}">{{title}}</h1>
+        <button @click="destroy">销毁</button>
     </div>
 
     <script type="text/javascript">
@@ -27,6 +39,11 @@
                 return {
                     title: "VUE",
                     opacity: 1
+                }
+            },
+            methods: {
+                destroy() {
+                    this.$destroy()
                 }
             },
             beforeCreate() {
@@ -54,7 +71,24 @@
                         this.opacity = 1
                     }
                 }, 10)
+                debugger
             },
+            beforeUpdate() {
+                console.log('beforeUpdate invoked.')
+                console.log('this:', this)
+            },
+            updated() {
+                console.log('updated invoked.')
+                console.log('this:', this)
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy invoked.')
+                console.log('this:', this)
+            },
+            destroyed() {
+                console.log('destroyed invoked.')
+                console.log('this:', this)
+            }
         })
     </script>
 </body>
