@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="demo">
         <h2>学生姓名：{{name}}</h2>
         <h2>学生性别：{{sex}}</h2>
     </div>
@@ -17,3 +17,9 @@
         },
     };
 </script>
+
+<style scoped>
+    .demo {
+        color: green;
+    }
+</style>

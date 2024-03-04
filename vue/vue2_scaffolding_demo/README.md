@@ -123,3 +123,49 @@ Vue.mixin(xxx)
 // 局部
 mixins: [xxx]
 ```
+
+## plugins
+
+- 功能：用于增强Vue
+
+- 本质：包含install方法的一个对象，install的第一个参数是Vue，之后的参数是插件使用者传递的数据
+
+- 定义插件
+
+```js
+export default {
+    install(Vue, str, num...) {
+        console.log(str, num)
+        
+        // 添加全局过滤器
+        Vue.filter(...)
+
+        // 添加全局自定义指令
+        Vue.directive(...)
+
+        // 添加全局混入
+        Vue.mixin(...)
+
+        // 添加实例方法
+        Vue.prototype.$xxxMethod = function() {}
+        Vue.prototype.$xxxProperty = xxx
+    }
+}
+```
+
+- 使用插件
+
+```js
+Vue.use(xxx)
+```
+
+## scoped样式
+
+- 作用：让样式在局部生效，防止冲突
+
+- 写法
+
+```vue
+<style scoped>
+</style>
+```
