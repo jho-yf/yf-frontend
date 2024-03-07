@@ -21,11 +21,7 @@
         components: {MyHeader, MyFooter, MyList},
         data() {
             return {
-                todoList: [
-                    {id: '001', title: '吃饭', done: true},
-                    {id: '002', title: '睡觉', done: false},
-                    {id: '003', title: '打豆豆', done: false}
-                ]
+                todoList: JSON.parse(localStorage.getItem('todoList')) || []
             }
         },
         methods: {
@@ -47,6 +43,14 @@
             },  
             clearAllDoneTodo() {
                 this.todoList = this.todoList.filter(item => !item.done)
+            }
+        },
+        watch: {
+            todoList: {
+                deep: true,
+                handler: function (val) {
+                    localStorage.setItem('todoList', JSON.stringify(val))
+                }
             }
         }
     };
