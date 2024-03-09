@@ -14,7 +14,7 @@
 
   export default {
     name: 'MyFooter',
-    props: ['todoList', 'clearAllDoneTodo', 'checkAllTodo'],
+    props: ['todoList'],
     computed: {
       total() {
         return this.todoList.length
@@ -28,14 +28,14 @@
           return this.total === this.totalDone && this.total > 0
         },
         set(value) {
-          this.checkAllTodo(value)
+          this.$emit('checkAllTodo', value)
         }
       }
     },
     methods: {
       clearDone() {
         if (confirm('确定清除所有已完成任务？')) {
-          this.clearAllDoneTodo()
+          this.$emit('clearAllDoneTodo')
         }
       }
     }

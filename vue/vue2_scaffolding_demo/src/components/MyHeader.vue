@@ -8,7 +8,6 @@
   import { nanoid } from 'nanoid';
   export default {
     name: 'MyHeader',
-    props: ['addTodo'],
     data() {
       return {
         title: ''
@@ -24,7 +23,7 @@
           title: this.title,
           done: false
         }
-        this.addTodo(todo)
+        this.$emit('addTodo', todo)
         this.title = ''
       }
     }
