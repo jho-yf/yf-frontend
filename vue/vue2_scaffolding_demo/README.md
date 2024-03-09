@@ -181,3 +181,38 @@ Vue.use(xxx)
    - 子组件 -> 父组件 通信(传递回调函数)
 3. `v-model`绑定的值不能是`props`传递过来的值，因为`props`是不能修改的
 4. props传过来的值若是对象类型，修改对象中的属性是不会报错的，但不推荐这样做
+
+## 组件的自定义事件
+
+1. 组件间的通信方式，用于子组件向父组件传递数据
+2. 绑定自定义事件
+    ```vue
+        <!-- 静态绑定 -->
+        <Demo @myEvent="myMethod" />
+        <Demo v-on:myEvent="myMethod" />
+
+        <!-- 动态绑定 -->
+        <Demo ref="demo" />
+        ...
+        mounted() {
+            this.$refs.demo.$on('myEvent', this.myMethod)
+        }
+    ```
+3. 若想自定义组件只能触发一次，可以使用`once`修饰符，或者`$once`方法
+4. 触发自定义事件
+
+    ```js
+        this.$emit('myEvent', data)
+    ```
+
+5. 解绑自定义事件
+
+    ```js
+        this.$off('myEvent')
+    ```
+
+6. 组件上也可以绑定原生DOM事件，需要使用`native`修饰符
+
+    ```vue
+        <Demo @click.native="show" />
+    ```
