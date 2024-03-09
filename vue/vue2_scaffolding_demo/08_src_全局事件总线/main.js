@@ -8,5 +8,5 @@ new Vue({
   beforeCreate() {
     // 全局事件总线
     Vue.prototype.$bus = this
-  }
+  },
 }).$mount('#app')

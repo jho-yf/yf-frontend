@@ -52,6 +52,14 @@
                     localStorage.setItem('todoList', JSON.stringify(val))
                 }
             }
+        },
+        mounted() {
+            this.$bus.$on('todoChecked', this.checkTodo)
+            this.$bus.$on('deleteTodo', this.deleteTodo)
+        },
+        beforeDestroy() {
+            this.$bus.$off('todoChecked')
+            this.$bus.$off('deleteTodo')
         }
     };
 </script>

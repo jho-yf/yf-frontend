@@ -216,3 +216,48 @@ Vue.use(xxx)
     ```vue
         <Demo @click.native="show" />
     ```
+
+## 全局事件总线
+
+1. 作用：用于组件间的通信，可以实现组件间的通信
+
+2. 配置全局事件总线
+
+`main.js`
+
+```js
+new Vue({
+  render: h => h(App),
+  beforeCreate() {
+    // 全局事件总线
+    Vue.prototype.$bus = this
+  },
+}).$mount('#app')
+```
+
+3. 使用事件总线
+
+
+```js
+// 提供数据
+this.$bus.$emit('myEvent', data)
+
+// 接收数据
+
+// 回调函数
+methods: {
+    onMyEvent(data) {
+        console.log(data)
+    }
+}
+
+// 挂载时，绑定事件
+mounted() {
+    this.$bus.$on('myEvent', this.onMyEvent)
+}
+
+// 销毁时，解绑事件
+beforeDestroy() {
+    this.$bus.$off('myEvent')
+}
+```
