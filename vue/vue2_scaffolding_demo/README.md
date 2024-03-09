@@ -261,3 +261,38 @@ beforeDestroy() {
     this.$bus.$off('myEvent')
 }
 ```
+
+## 消息订阅与发布
+
+1. 作用：用于组件间的通信，可以实现组件间的通信、
+
+2. 安装`pubsub`
+
+```shell
+npm i pubsub-js
+```
+
+3. 使用
+
+```js
+// 引入
+import pubsub from 'pubsub-js'
+
+// 订阅
+mounted() {
+    this.sid = pubsub.subscribe('myEvent', (msg, data) => {
+        // TODO
+    }
+}
+
+// 发布数据
+pubsub.publish('myEvent', 'hello')
+
+// 取消订阅
+beforeDestroy() {
+    pubsub.unsubscribe(this.sid)
+}
+```
+
+
+
