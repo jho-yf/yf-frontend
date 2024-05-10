@@ -38,6 +38,13 @@
             deleteTodo(id) {
                 this.todoList = this.todoList.filter(item => item.id !== id)
             },
+            updateTodo(id, title) {
+                this.todoList.forEach((item) => {
+                    if (item.id === id) {
+                        item.title = title
+                    }
+                })
+            },
             checkAllTodo(isChecked) {
                 this.todoList.forEach(todo => todo.done = isChecked)
             },  
@@ -56,10 +63,12 @@
         mounted() {
             this.$bus.$on('todoChecked', this.checkTodo)
             this.$bus.$on('deleteTodo', this.deleteTodo)
+            this.$bus.$on('updateTodo', this.updateTodo)
         },
         beforeDestroy() {
             this.$bus.$off('todoChecked')
             this.$bus.$off('deleteTodo')
+            this.$bus.$off('updateTodo')
         }
     };
 </script>
@@ -81,6 +90,13 @@
         cursor: pointer;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
         border-radius: 4px;
+    }
+
+    .btn-edit {
+        color: #fff;
+        background-color: skyblue;
+        border: 1px solid rgb(103, 165, 189);
+        margin-right: 5px;
     }
 
     .btn-danger {

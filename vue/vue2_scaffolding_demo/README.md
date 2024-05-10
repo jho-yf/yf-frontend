@@ -307,3 +307,32 @@ this.$nextTick(() => {
 2. 作用：当DOM更新后，执行回调函数
 3. 使用场景：当改变数据后，要基于更新后的新DOM，执行一些操作
 
+## 过渡与动画
+
+1. 样式设置
+
+- `v-enter`：元素进入开始时的样式
+- `v-enter-active`：元素进入过程中的样式
+- `v-enter-to`：元素进入结束时的样式
+- `v-leave`：元素离开开始时的样式
+- `v-leave-active`：元素离开过程中的样式
+- `v-leave-to`：元素离开结束时的样式
+
+2. 使用`<transition>`包裹要过渡的样式，并配置name属性
+
+```html
+<transition name="t1">
+    <h1 v-show="!isShow">My Component</h1>
+</transition>
+```
+
+3. 使用`<transition-group>`包裹多个要过渡的元素，且每个元素都要制定key值
+
+```html
+<transition-group name="t1" appear>
+    <h1 v-show="isShow" key="k1">My Component 2</h1>
+    <h1 v-show="!isShow" key="k2">My Component 2 Copy</h1>
+</transition-group>
+```
+
+
