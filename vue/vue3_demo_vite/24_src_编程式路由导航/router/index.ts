@@ -10,10 +10,6 @@ const router = createRouter({
     history: createWebHashHistory(),
     // 路由规则
     routes: [
-        { 
-            path: '/',
-            redirect: '/home'
-        },
         {
             path: '/home',
             name: 'home',

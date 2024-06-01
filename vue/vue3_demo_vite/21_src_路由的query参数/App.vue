@@ -4,11 +4,11 @@
     <!-- 导航 -->
     <div class="navigate">
       <!-- 路由名称写法 -->
-      <RouterLink replace :to="{name:'home'}" active-class="active">首页</RouterLink>
+      <RouterLink :to="{name:'home'}" active-class="active">首页</RouterLink>
       <!-- 对象属性写法 -->
-      <RouterLink replace :to="{path:'/news'}" active-class="active">新闻</RouterLink>
+      <RouterLink :to="{path:'/news'}" active-class="active">新闻</RouterLink>
       <!-- 简单path写法 -->
-      <RouterLink replace to="/about" active-class="active">关于</RouterLink>
+      <RouterLink to="/about" active-class="active">关于</RouterLink>
     </div>
 
     <!-- 内容 -->
